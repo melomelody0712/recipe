@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>レシピカード</title>
+  <link rel="stylesheet" href="recipe.css" />
+</head>
+<body>
+
+<h1>レシピ管理</h1>
+
+<section class="editor">
+  <label>レシピ名</label>
+  <input id="title">
+
+  <label>材料</label>
+  <textarea id="ingredients"></textarea>
+
+  <label>調味料</label>
+  <textarea id="seasonings"></textarea>
+
+  <label>手順</label>
+  <textarea id="steps"></textarea>
+  <button type="button" onclick="saveRecipe()">保存</button>
+</section>
+
+<section class="controls">
+  <button onclick="printAll()">全レシピ印刷</button>
+  <button onclick="printSelected()">選択したレシピを印刷</button>
+  <button onclick="exportData()">バックアップ(JSON)</button>
+  <input type="file" onchange="importData(event)" />
+</section>
+
+<ul id="recipeList"></ul>
+
+<h2>プレビュー</h2>
+<div id="previewArea"></div>
+
+<!-- 印刷用 -->
+<div id="printArea"></div>
+
+<script src="recipe.js"></script>
+</body>
+</html>
