@@ -2,41 +2,95 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>レシピカード</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600;800&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="recipe.css" />
 </head>
 <body>
 
-<h1>レシピ管理</h1>
+<div class="grain"></div>
 
-<section class="editor">
-  <label>レシピ名</label>
-  <input id="title">
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>レシピ管理</h1>
+    </div>
+  </div>
+</header>
 
-  <label>材料</label>
-  <textarea id="ingredients"></textarea>
+<main class="main-content">
 
-  <label>調味料</label>
-  <textarea id="seasonings"></textarea>
+  <!-- エディタ -->
+  <section class="editor card">
+    <h2 class="section-title">レシピを追加</h2>
 
-  <label>手順</label>
-  <textarea id="steps"></textarea>
-  <button type="button" onclick="saveRecipe()">保存</button>
-</section>
+    <div class="field">
+      <label class="field-label" for="title">レシピ名</label>
+      <input id="title" class="field-input" placeholder="例：肉じゃが">
+    </div>
 
-<section class="controls">
-  <button onclick="printAll()">全レシピ印刷</button>
-  <button onclick="printSelected()">選択したレシピを印刷</button>
-  <button onclick="exportData()">バックアップ(JSON)</button>
-  <input type="file" onchange="importData(event)" />
-</section>
+    <div class="field-row">
+      <div class="field">
+        <label class="field-label" for="ingredients">材料</label>
+        <textarea id="ingredients" class="field-textarea" placeholder="じゃがいも 3個&#10;玉ねぎ 1個&#10;牛肉 200g" rows="6"></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="seasonings">調味料</label>
+        <textarea id="seasonings" class="field-textarea" placeholder="醤油 大さじ3&#10;みりん 大さじ2&#10;砂糖 大さじ1" rows="6"></textarea>
+      </div>
+    </div>
 
-<ul id="recipeList"></ul>
+    <div class="field">
+      <label class="field-label" for="steps">手順</label>
+      <textarea id="steps" class="field-textarea" placeholder="1. じゃがいもを一口大に切る&#10;2. 玉ねぎをくし切りにする&#10;3. 鍋に油を熱し肉を炒める" rows="7"></textarea>
+    </div>
 
-<h2>プレビュー</h2>
-<div id="previewArea"></div>
+    <button type="button" class="btn btn-primary" onclick="saveRecipe()">
+      保存する
+    </button>
+  </section>
 
-<!-- 印刷用 -->
+  <!-- コントロール -->
+  <section class="controls card">
+    <div class="controls-inner">
+      <button class="btn btn-ghost" onclick="printAll()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        全レシピ印刷
+      </button>
+      <button class="btn btn-ghost" onclick="printSelected()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        選択して印刷
+      </button>
+      <button class="btn btn-ghost" onclick="exportData()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        バックアップ
+      </button>
+      <label class="btn btn-ghost" style="cursor:pointer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        インポート
+        <input type="file" onchange="importData(event)" style="display:none">
+      </label>
+    </div>
+  </section>
+
+  <!-- レシピ一覧 -->
+  <section class="recipe-list-section">
+    <h2 class="section-title">レシピ一覧</h2>
+    <ul id="recipeList" class="recipe-list"></ul>
+  </section>
+
+  <!-- レシピカード -->
+  <section class="preview-section">
+    <h2 class="section-title">レシピカード</h2>
+    <div id="previewArea" class="preview-grid"></div>
+  </section>
+
+</main>
+
+<div id="toast" class="toast"></div>
 <div id="printArea"></div>
 
 <script src="recipe.js"></script>
