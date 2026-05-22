@@ -2,6 +2,8 @@
 
 > Web開発の練習として作成したアプリです。
 
+**デモ：** https://melomelody0712.github.io/recipe/recipe.html
+
 ブラウザだけで動くレシピ管理Webアプリです。バックエンド不要・ライブラリ不使用のバニラJavaScriptで実装しました。
 
 ## 機能
