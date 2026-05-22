@@ -509,18 +509,19 @@ body {
   }
 
   #printArea {
-    column-count: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     column-gap: 10mm;
+    row-gap: 8mm;
     width: 100%;
     box-sizing: border-box;
   }
 
   #printArea .recipe-card {
-    width: 100%;
     box-sizing: border-box;
-    page-break-inside: avoid;
     break-inside: avoid;
-    margin-bottom: 20px;
+    page-break-inside: avoid;
+    margin: 0;
     padding: 0 5px;
     border: none;
     border-radius: 0;
