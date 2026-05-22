@@ -499,9 +499,11 @@ body {
 
 /* ===== PRINT ===== */
 @media print {
-  body * { display: none; }
-
-  #printArea, #printArea * { display: block; }
+  /* printArea以外を非表示（#printAreaへのdisplay競合を避けるため個別指定） */
+  .grain,
+  .site-header,
+  .main-content,
+  .toast { display: none !important; }
 
   @page {
     size: A4 landscape;
@@ -518,6 +520,7 @@ body {
   }
 
   #printArea .recipe-card {
+    display: block;
     box-sizing: border-box;
     break-inside: avoid;
     page-break-inside: avoid;
@@ -532,6 +535,7 @@ body {
   }
 
   #printArea .recipe-card h2 {
+    display: block;
     text-align: center;
     border-bottom: 1px solid #000;
     margin-top: 0;
@@ -541,6 +545,7 @@ body {
   }
 
   #printArea .block {
+    display: block;
     border-top: 1px solid #000;
     padding: 5px 0 0 0;
     margin: 5px 0 0 0;
